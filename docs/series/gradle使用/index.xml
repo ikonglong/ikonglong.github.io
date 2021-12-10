@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gradle使用 on 恐龙的博客</title>
+    <link>http://localhost:1313/series/gradle%E4%BD%BF%E7%94%A8/</link>
+    <description>Recent content in Gradle使用 on 恐龙的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 16 Dec 2020 00:30:25 +0800</lastBuildDate><atom:link href="http://localhost:1313/series/gradle%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gradle 采坑记</title>
+      <link>http://localhost:1313/post/gradle-%E9%87%87%E5%9D%91%E8%AE%B0/</link>
+      <pubDate>Wed, 16 Dec 2020 00:30:25 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/gradle-%E9%87%87%E5%9D%91%E8%AE%B0/</guid>
+      <description>最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。 Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用。Wrapper 的主要目的是将</description>
+    </item>
+    
+  </channel>
+</rss>
