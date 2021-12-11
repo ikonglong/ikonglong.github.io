@@ -9,6 +9,6 @@
     <pubDate>Wed, 16 Dec 2020 00:30:25 &#43;0800</pubDate><author>
         <name>KongLong</name>
     </author><guid>http://example.org/gradle-%E9%87%87%E5%9D%91%E8%AE%B0/</guid>
-    <description><![CDATA[最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。 Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用。Wrapper 的主要目的是将]]></description>
+    <description><![CDATA[<p>最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。</p>]]></description>
 </item></channel>
 </rss>

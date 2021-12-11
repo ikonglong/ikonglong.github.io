@@ -8,7 +8,7 @@ categories: ["编程笔记"]
 ---
 
 最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。
-
+<!--more-->
 Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用。Wrapper 的主要目的是将项目构建依赖的 Gradle 版本配置化，作为构建脚本的一部分。Wrapper 只是一个脚本，它调用指定版本的 Gradle；如果指定版本的 Gradle 不存在，就下载并自动安装，避免开发者手动安装。官方推荐使用 Wrapper 执行任何 Gradle build。可是墙内下载 Gradle 非常慢，一开始还不知道为啥必须下载，如何加速，这让人很懊恼。如何使用 Wrapper，请看 [The Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html)。
 
 解决办法有两个，但都需要先手工把对应版本下载到本地。
