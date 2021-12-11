@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>所有文章 - 恐龙的烂笔头</title>
+        <link>http://example.org/posts/</link>
+        <description>所有文章 | 恐龙的烂笔头</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 16 Dec 2020 00:30:25 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Gradle 采坑记</title>
+    <link>http://example.org/gradle-%E9%87%87%E5%9D%91%E8%AE%B0/</link>
+    <pubDate>Wed, 16 Dec 2020 00:30:25 &#43;0800</pubDate><author>
+        <name>KongLong</name>
+    </author><guid>http://example.org/gradle-%E9%87%87%E5%9D%91%E8%AE%B0/</guid>
+    <description><![CDATA[最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。 Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用。Wrapper 的主要目的是将]]></description>
+</item></channel>
+</rss>
