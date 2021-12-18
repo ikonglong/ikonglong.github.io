@@ -73,7 +73,7 @@ enableEmoji = true
   # 网站名称
   title = "恐龙的烂笔头"
   # 网站描述
-  description = "恐龙的烂笔头"
+  description = "Knowledge advances by steps and not by leaps."
   # 网站关键词
   keywords = ["Theme", "Hugo"]
   #  网站默认主题样式 ("light", "dark", "black", "auto")
@@ -217,7 +217,7 @@ enableEmoji = true
       #  主页显示的网站标题 (支持 HTML 格式)
       title = "恐龙的烂笔头"
       # 主页显示的网站副标题
-      subtitle = ""
+      subtitle = "Knowledge advances by steps and not by leaps."
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号

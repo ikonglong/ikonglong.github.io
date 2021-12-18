@@ -2,7 +2,7 @@
     <channel>
         <title>恐龙的烂笔头</title>
         <link>http://example.org/</link>
-        <description>恐龙的烂笔头</description>
+        <description>Knowledge advances by steps and not by leaps.</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
