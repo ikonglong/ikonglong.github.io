@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>IO - 标签 - 恐龙的烂笔头</title>
+        <link>http://example.org/tags/io/</link>
+        <description>IO - 标签 - 恐龙的烂笔头</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/io/" rel="self" type="application/rss+xml" /><item>
+    <title>Unix IO models</title>
+    <link>http://example.org/unix-io-models/</link>
+    <pubDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</pubDate><author>
+        <name>KongLong</name>
+    </author><guid>http://example.org/unix-io-models/</guid>
+    <description><![CDATA[<p>想起前同事有一天问我的一个问题，blocking|unblocking I/O 跟 sync|async I/O 有什么不同？<br>
+前几天带着这个问题，读了《Unix Network Programming - Volume 1》。本文准备学以致用，把 Unix 系统上 5 种可用的 I/O 模型用自己的话讲清楚，并把前面这个问题给解答了。</p>]]></description>
+</item></channel>
+</rss>
