@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/unix-io-models/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-11T15:40:33+08:00" />
-<meta property="article:modified_time" content="2021-12-18T22:36:00+08:00" /><meta property="og:site_name" content="恐龙的烂笔头" />
+<meta property="article:modified_time" content="2021-12-18T22:53:59+08:00" /><meta property="og:site_name" content="恐龙的烂笔头" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://example.org/logo.png"/>
@@ -36,7 +36,7 @@
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/unix-io-models\/"
         },"genre": "posts","keywords": "IO","wordcount":  1611 ,
-        "url": "http:\/\/example.org\/unix-io-models\/","datePublished": "2021-12-11T15:40:33+08:00","dateModified": "2021-12-18T22:36:00+08:00","publisher": {
+        "url": "http:\/\/example.org\/unix-io-models\/","datePublished": "2021-12-11T15:40:33+08:00","dateModified": "2021-12-18T22:53:59+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -223,7 +223,7 @@
 <li>一个 <strong>sync I/O 操作</strong>会导致请求进程阻塞，直到 I/O 操作完成。</li>
 <li>一个 <strong>async I/O 操作</strong>不会导致请求进程阻塞。</li>
 </ul>
-<p>根据这个定义，前 4 个模型都是同步的，因为使用它们时实际的 I/O 操作（recvfrom）都会阻塞进程。只有 async I/O 模型满足 async I/O 的定义。</p>
+<p>根据这个定义，前 4 个模型都是同步的，因为使用它们时 <strong>实际的 I/O 操作（<code>recvfrom</code>）</strong> 都会阻塞进程。只有 async I/O 模型满足 async I/O 的定义。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li>《UNIX Network Programming Volume 1, Third Edition》6.2 I/O Models</li>
