@@ -2,7 +2,7 @@
     <channel>
         <title>恐龙的烂笔头</title>
         <link>http://example.org/</link>
-        <description>这是我的全新 Hugo 网站</description>
+        <description>恐龙的烂笔头</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>

@@ -73,7 +73,7 @@ enableEmoji = true
   # 网站名称
   title = "恐龙的烂笔头"
   # 网站描述
-  description = "这是我的全新 Hugo 网站"
+  description = "恐龙的烂笔头"
   # 网站关键词
   keywords = ["Theme", "Hugo"]
   #  网站默认主题样式 ("light", "dark", "black", "auto")
@@ -215,9 +215,9 @@ enableEmoji = true
       # 文件路径是相对于 static 或者 assets 目录的
       avatarURL = "/images/avatar.webp"
       #  主页显示的网站标题 (支持 HTML 格式)
-      title = ""
+      title = "恐龙的烂笔头"
       # 主页显示的网站副标题
-      subtitle = "这是我的全新 Hugo 网站"
+      subtitle = ""
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
