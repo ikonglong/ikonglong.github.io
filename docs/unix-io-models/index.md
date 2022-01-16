@@ -77,6 +77,20 @@ POSIX 定义了如下两个术语：
 
 根据这个定义，前 4 个模型都是同步的，因为使用它们时 **实际的 I/O 操作（`recvfrom`）** 都会阻塞进程。只有 async I/O 模型满足 async I/O 的定义。
 
+{{< admonition type=note title="注意" open=true >}}
+sync 和 async I/O 并不是具体的 I/O model，只是根据 **请求进程是否被阻塞直到 I/O 操作完成** 这一点对 I/O model 的分类而已。因此它们不像 I/O model 那样描述 I/O 操作的具体工作方式。
+{{< /admonition >}}
+
+## 常见问题与错误理解
+
+- blocking/non-blocking I/O 与 sync/async I/O 之间有什么区别？
+
+  我们先看问题本身，blocking/non-blocking I/O 确实是具体的 I/O model。但如果 sync/async I/O 指的是 I/O model，问题描述本身就有错误，因为没有一个具体的 I/O model 叫 sync I/O；如果指的是上一节中讲述的对 I/O model 的分类，也需要对问题描述做些调整，以便说清楚要对比的两个对象是什么。
+
+- 有人认为，I/O 有阻塞/非阻塞、同步/异步这分，这两个维度是正交的，两两组合就得到四种 I/O model。
+  
+  这个理解错在，这两个维度并非是正交的，因此不能两两组合以描述每种具体的 I/O model。根据上一节内容可知，sync I/O 这个分类包含了所有在 I/O 操作完成前会阻塞请求进程的 I/O model，因此这两个维度不是正交的。
+
 ## 参考资料
 
 - 《UNIX Network Programming Volume 1, Third Edition》6.2 I/O Models
