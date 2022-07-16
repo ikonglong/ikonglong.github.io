@@ -11,7 +11,7 @@
     <pubDate>Sat, 16 Jul 2022 16:48:01 &#43;0800</pubDate><author>
         <name>KongLong</name>
     </author><guid>http://example.org/firewalld-usage/</guid>
-    <description><![CDATA[Introduction to firewalld The dynamic firewall daemon firewalld provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or]]></description>
+    <description><![CDATA[<p>This post shows the common ways in which the <code>firewalld</code> command is used.</p>]]></description>
 </item><item>
     <title>Unix IO models</title>
     <link>http://example.org/unix-io-models/</link>
