@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Firewalld Usage - 恐龙的烂笔头</title><meta name="Description" content="Knowledge advances by steps and not by leaps."><meta property="og:title" content="Firewalld Usage" />
+<meta property="og:description" content="Introduction to firewalld The dynamic firewall daemon firewalld provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/firewalld-usage/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-16T16:48:01+08:00" />
+<meta property="article:modified_time" content="2022-07-16T16:48:01+08:00" /><meta property="og:site_name" content="恐龙的烂笔头" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="Firewalld Usage"/>
+<meta name="twitter:description" content="Introduction to firewalld The dynamic firewall daemon firewalld provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or"/>
+<meta name="application-name" content="DoIt">
+<meta name="apple-mobile-web-app-title" content="DoIt">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/firewalld-usage/" /><link rel="prev" href="http://example.org/unix-io-models/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Firewalld Usage",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/firewalld-usage\/"
+        },"genre": "posts","keywords": "linux, firewall","wordcount":  2182 ,
+        "url": "http:\/\/example.org\/firewalld-usage\/","datePublished": "2022-07-16T16:48:01+08:00","dateModified": "2022-07-16T16:48:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "KongLong"
+            },"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme);}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="恐龙的烂笔头"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="恐龙的烂笔头"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/about/" title="">关于</a><a href="#" onclick="return false;" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Firewalld Usage</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">KongLong</a>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-07-16">2022-07-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-07-16">2022-07-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2182 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction-to-firewalld">Introduction to firewalld</a></li>
+    <li><a href="#understanding-firewalld">Understanding firewalld</a></li>
+    <li><a href="#comparison-of-firewalld-to-system-config-firewall-and-iptables">Comparison of firewalld to system-config-firewall and iptables</a></li>
+    <li><a href="#understanding-network-zones">Understanding Network Zones</a></li>
+    <li><a href="#choosing-a-network-zone">Choosing a Network Zone</a></li>
+    <li><a href="#understanding-predefined-services">Understanding Predefined Services</a></li>
+    <li><a href="#understanding-the-direct-interface">Understanding the Direct Interface</a></li>
+    <li><a href="#using-the-iptables-service">Using the iptables Service</a></li>
+    <li><a href="#configuring-the-firewall-using-the-command-line-tool-firewall-cmd">Configuring the Firewall Using the Command Line Tool, firewall-cmd</a></li>
+    <li><a href="#view-the-firewall-settings-using-clicommand-line-interface">View the Firewall Settings Using CLI(Command Line Interface)</a></li>
+    <li><a href="#change-the-firewall-settings-using-cli">Change the Firewall Settings Using CLI</a>
+      <ul>
+        <li><a href="#drop-all-packets-panic-mode-恐慌模式">Drop All Packets (Panic Mode 恐慌模式)</a></li>
+        <li><a href="#reload-the-firewall-using-cli">Reload the Firewall Using CLI</a></li>
+        <li><a href="#add-an-interface-to-a-zone">Add an Interface to a Zone</a></li>
+        <li><a href="#getset-the-default-zone">Get/Set the Default Zone</a></li>
+        <li><a href="#queryopenclose-ports-in-the-firewall-using-cli">Query/Open/Close Ports in the Firewall Using CLI</a></li>
+        <li><a href="#add-a-service-to-a-zone">Add a Service to a Zone</a></li>
+        <li><a href="#remove-a-service-from-a-zone">Remove a Service from a Zone</a></li>
+        <li><a href="#configure-ip-address-masquerading">Configure IP Address Masquerading</a></li>
+        <li><a href="#configure-port-forwarding-using-cli">Configure Port Forwarding Using CLI</a></li>
+      </ul>
+    </li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction-to-firewalld">Introduction to firewalld</h2>
+<p>The dynamic firewall daemon <strong>firewalld</strong> provides a <strong>dynamically managed firewall</strong> with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or applications to add firewall rules directly.</p>
+<!-- more -->
+<h2 id="understanding-firewalld">Understanding firewalld</h2>
+<p><strong>firewall-config</strong> is a graphical configuration tool that is used to configure firewalld.
+The <strong>firewall service</strong> provided by firewalld is dynamic rather than static because changes to the configuration can be made at anytime and are immediately implemented, there is no need to save or apply the changes. No unintended disruption of existing network connections occurs as no part of the firewall has to be reloaded.
+<strong>firewall-cmd</strong> is a command line client for firewalld.</p>
+<h2 id="comparison-of-firewalld-to-system-config-firewall-and-iptables">Comparison of firewalld to system-config-firewall and iptables</h2>
+<p>The essential differences between firewalld and the iptables service are:
+The iptables service stores configuration in /etc/sysconfig/iptables while firewalld stores it in various XML files in /usr/lib/firewalld/ and /etc/firewalld/. Note that the /etc/sysconfig/iptables file does not exist as firewalld is installed by default on Red Hat Enterprise Linux.
+With the iptables service, every single change means flushing all the old rules and reading all the new rules from /etc/sysconfig/iptables while with firewalld there is no re-creating of all the rules; only the differences are applied. Consequently, firewalld can change the settings during runtime without existing connections being lost.
+Both use iptables tool to talk to the kernel packet filter.</p>
+<p><figure><a class="lightgallery" href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png" title="The Firewall Stack" data-thumbnail="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png" data-sub-html="<h2>The Firewall Stack</h2><p>The Firewall Stack</p>">
+        <img
+            class="lazyload"
+            data-src="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png"
+            data-srcset="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png, https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png 1.5x, https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png 2x"
+            data-sizes="auto"
+            alt="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/images/firewall_stack.png"
+        />
+    </a><figcaption class="image-caption">The Firewall Stack</figcaption>
+    </figure></p>
+<h2 id="understanding-network-zones">Understanding Network Zones</h2>
+<p>Firewalls can be used to separate networks into different zones based on the level of trust the user has decided to place on the devices and traffic within that network. NetworkManager informs firewalld to which zone an interface belongs. An interface&rsquo;s assigned zone can be changed by NetworkManager or via the firewall-config tool which can open the relevant NetworkManager window for you.
+The zone settings in /etc/firewalld/ are a range of preset settings which can be quickly applied to a network interface. They are listed here with a brief explanation:
+<strong>drop</strong>
+Any incoming network packets are dropped, there is no reply. Only outgoing network connections are possible.
+<strong>block</strong>
+Any incoming network connections are rejected with an icmp-host-prohibited message for IPv4 and icmp6-adm-prohibited for IPv6. Only network connections initiated from within the system are possible.
+<strong>public</strong>
+For use in public areas. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted.
+<strong>external</strong>
+For use on external networks with masquerading enabled especially for routers. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted.
+<strong>dmz</strong>
+For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.
+<em>DMZ 更好的解释请看 <a href="http://linux.vbird.org/linux_server/0250simple_firewall.php#firewall_topo" target="_blank" rel="noopener noreffer">鸟哥的私房菜-防火墙的一般网络布线示意</a></em>
+<strong>work</strong>
+For use in work areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.
+<strong>home</strong>
+For use in home areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.
+<strong>internal</strong>
+For use on internal networks. You mostly trust the other computers on the networks to not harm your computer. Only selected incoming connections are accepted.
+<strong>trusted</strong>
+All network connections are accepted.
+It is possible to designate one of these zones to be the default zone. When interface connections are added to NetworkManager, they are assigned to the default zone. <strong>On installation, the default zone in firewalld is set to be the public zone.</strong></p>
+<h2 id="choosing-a-network-zone">Choosing a Network Zone</h2>
+<p>The network zone names have been chosen to be self-explanatory and to allow users to quickly make a reasonable decision. However, <strong>a review of the default configuration settings should be made and unnecessary services disabled according to your needs and risk assessments.</strong></p>
+<h2 id="understanding-predefined-services">Understanding Predefined Services</h2>
+<p>A service can be a list of local ports and destinations as well as a list of firewall helper modules automatically loaded if a service is enabled. The use of predefined services makes it easier for the user to enable and disable access to a service.
+The services are specified by means of individual XML configuration files which are named in the following format: <em>service-name.xml</em>.
+<strong><font color=red>List the default predefined services available:</font></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; ls /usr/lib/firewalld/services/
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Files in /usr/lib/firewalld/services/ must not be edited. Only the files in /etc/firewalld/services/ should be edited.</strong>
+<strong>List the system or user created services:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; ls /etc/firewalld/services/
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Add or change a service:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Use files in /usr/lib/firewalld/services/ as templates</span>
+&gt; cp /usr/lib/firewalld/services/<span class="o">[</span>service<span class="o">]</span>.xml /etc/firewalld/services/<span class="o">[</span>service<span class="o">]</span>.xml
+</code></pre></td></tr></table>
+</div>
+</div><p>firewalld will prefer files in /etc/firewalld/services/ but will fall back to /usr/lib/firewalld/services/ should a file be deleted, but only after a reload.</p>
+<h2 id="understanding-the-direct-interface">Understanding the Direct Interface</h2>
+<p>firewalld has a so called “direct interface”, which enables directly passing rules to iptables, ip6tables and ebtables. It is intended for use by applications and not users. The direct interface mode is intended for services or applications to add specific firewall rules during runtime.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --direct ...
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="using-the-iptables-service">Using the iptables Service</h2>
+<p>Use the iptables and ip6tables services instead of firewalld.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Disable firewalld</span>
+&gt; systemctl disable firewalld
+&gt; systemctl stop firewalld
+
+<span class="c1"># Package iptables-services contains iptables and ip6tables service</span>
+&gt; yum install iptables-services
+&gt; systemctl start iptables
+&gt; systemctl start ip6tables
+&gt; systemctl <span class="nb">enable</span> iptables
+&gt; systemctl <span class="nb">enable</span> ip6tables
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="configuring-the-firewall-using-the-command-line-tool-firewall-cmd">Configuring the Firewall Using the Command Line Tool, firewall-cmd</h2>
+<p><strong>Check firewall-cmd version</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --version
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>View help</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --help
+</code></pre></td></tr></table>
+</div>
+</div><p>为了让所做的设置永久生效，需要给 除添加有 &ndash;direct 选项的命令之外的 所有命令添加 <strong>&ndash;permanent</strong>。若无，则设置仅在下一次 <strong>firewall-cmd &ndash;reload</strong>、system boot、firewalld service restart之前有效。<strong>reloading firewall本身并不会破坏已有网络连接，但请注意这样做会丢弃已做出的短暂的设置修改。</strong></p>
+<h2 id="view-the-firewall-settings-using-clicommand-line-interface">View the Firewall Settings Using CLI(Command Line Interface)</h2>
+<p><strong>Check the state of firewalld</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --state
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>View the list of active zones, with a list of the interfaces currently assigned to them</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --get-active-zones
+public
+  interfaces: em1
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Find out the zone that an interface, for example em1, is currently assigned to</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --get-zone-of-interface<span class="o">=</span>em1
+public
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Find out all the interfaces assigned to a zone</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>public --list-interfaces
+em1 wlan0
+</code></pre></td></tr></table>
+</div>
+</div><p>This information is obtained from <strong>NetworkManager</strong> and only shows interfaces, not connections.
+<strong>Find out all the settings of a zone</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>public --list-all
+public
+  interfaces:
+  services: mdns dhcpv6-client ssh
+  ports:
+  forward-ports:
+  icmp-blocks: source-quench
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>View the list of services currently loaded</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --get-services
+cluster-suite pop3s bacula-client smtp ipp radius bacula ftp mdns samba dhcpv6-client dns openvpn imaps samba-client http https ntp vnc-server telnet libvirt ssh ipsec ipp-client amanda-client tftp-client nfs tftp libvirt-tls
+</code></pre></td></tr></table>
+</div>
+</div><p>This includes all loaded <strong>predefined services</strong> and <strong>custom services</strong>.
+<strong>List all custom services, even not yet loaded</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --permanent --get-services
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="change-the-firewall-settings-using-cli">Change the Firewall Settings Using CLI</h2>
+<h3 id="drop-all-packets-panic-mode-恐慌模式">Drop All Packets (Panic Mode 恐慌模式)</h3>
+<p><strong>Start dropping all incoming and outgoing packets</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --panic-on
+</code></pre></td></tr></table>
+</div>
+</div><p>Active connections will be terminated after a period of inactivity; the time taken depends on the individual session time out values.
+<strong>Disable panic mode</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --panic-off
+</code></pre></td></tr></table>
+</div>
+</div><p>After disabling panic mode, established connections might work again if panic mode was enabled for a short period of time.
+<strong>Find out if panic mode is enabled or disabled</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --query-panic
+</code></pre></td></tr></table>
+</div>
+</div><p>Prints yes with exit status 0, if enabled, prints no with exit status 1 otherwise.</p>
+<h3 id="reload-the-firewall-using-cli">Reload the Firewall Using CLI</h3>
+<p><strong>Reload the firewall with out interrupting user connections, that is to say, with out losing state info</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --reload
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Reload the firewall and interrupt user connections, that is to say, to discard state info</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --complete-reload
+</code></pre></td></tr></table>
+</div>
+</div><p>This command should normally only be used in case of severe firewall problems. For example, if there are state info problems and no connection can be established but the firewall rules are correct.</p>
+<h3 id="add-an-interface-to-a-zone">Add an Interface to a Zone</h3>
+<p><strong>Add an Interface to a Zone Using the Command Line Interface (CLI)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>public --add-interface<span class="o">=</span>em1
+</code></pre></td></tr></table>
+</div>
+</div><p>To make this setting permanent, add the <strong>&ndash;permanent</strong> option and reload the firewall.
+<strong>Add an Interface to a Zone by Editing the Interface Configuration File (e.g. add em1 to the work zone)</strong></p>
+<blockquote>
+<p>ZONE=work</p>
+</blockquote>
+<p>Note that if you omit the ZONE option, or use ZONE=, or ZONE='', then the default zone will be used.
+<strong>NetworkManager</strong> will automatically reconnect and the zone will be set accordingly.</p>
+<h3 id="getset-the-default-zone">Get/Set the Default Zone</h3>
+<p><strong>Print default zone for connections and interfaces</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --get-default-zone
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Set the Default Zone by Using CLI(Command Line Interface)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --set-default-zone<span class="o">=</span>public
+</code></pre></td></tr></table>
+</div>
+</div><p>This change will take immediate effect and in this case it is not necessary to reload the firewall.
+<strong>Set the Default Zone by Editing the firewalld Configuration File</strong>
+Edit /etc/firewalld/firewalld.conf as follows:</p>
+<blockquote>
+<p># default zone
+# The default zone used if an empty zone string is used.
+# Default: public
+DefaultZone=home</p>
+</blockquote>
+<p>Reload the firewall</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --reload
+</code></pre></td></tr></table>
+</div>
+</div><p>This will reload the firewall without losing state information (TCP sessions will not be interrupted).</p>
+<h3 id="queryopenclose-ports-in-the-firewall-using-cli">Query/Open/Close Ports in the Firewall Using CLI</h3>
+<p><strong>List all open ports for a zone</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>dmz --list-ports
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that this will not show ports opened as a result of the &ndash;add-services command.
+<strong>Query ports to check if they&rsquo;re open</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>public --query-port<span class="o">=</span>5060-5061/udp
+yes
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Close ports</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --permanent --zone<span class="o">=</span>public --remove-port<span class="o">=</span>5060-5061/udp
+success
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Add a port to a zone (e.g. allow TCP traffic to port 8080 to the dmz zone)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>dmz --add-port<span class="o">=</span>8080/tcp
+</code></pre></td></tr></table>
+</div>
+</div><p>To make this setting permanent, add the &ndash;permanent option and reload the firewall.
+<strong>Add a range of ports to a zone (e.g. allow the ports from 5060 to 5061 to the public zone)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>5060-5061/udp
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="add-a-service-to-a-zone">Add a Service to a Zone</h3>
+<p><strong>Add a service to a zone(e.g.allow SMTP to the work zone)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>work --add-service<span class="o">=</span>smtp
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Add a Service to a Zone by Editing XML Files</strong>
+See <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html" target="_blank" rel="noopener noreffer">How to using firewalls</a></p>
+<h3 id="remove-a-service-from-a-zone">Remove a Service from a Zone</h3>
+<p><strong>Remove a service from a zone(e.g. remove SMTP from the work zone)</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>work --remove-service<span class="o">=</span>smtp
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Remove a Service from a Zone by Editing XML files</strong>
+See <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html" target="_blank" rel="noopener noreffer">How to using firewalls</a></p>
+<h3 id="configure-ip-address-masquerading">Configure IP Address Masquerading</h3>
+<p><strong>Check if IP masquerading is enabled for the given zone</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --query-masquerade
+</code></pre></td></tr></table>
+</div>
+</div><p>Prints yes with exit status 0, if enabled, prints no with exit status 1 otherwise. If zone is omitted, the default zone will be used.
+<strong>enable IP masquerading</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --add-masquerade
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>disable IP masquerading</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --remove-masquerade
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="configure-port-forwarding-using-cli">Configure Port Forwarding Using CLI</h3>
+<p>To forward inbound network packets from one port to an alternative port or address, <strong>first</strong> enable IP address masquerading for a zone.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --add-masquerade
+</code></pre></td></tr></table>
+</div>
+</div><p>To forward packets to a local port, that is to say to a port on the same system</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --add-forward-port<span class="o">=</span><span class="nv">port</span><span class="o">=</span>22:proto<span class="o">=</span>tcp:toport<span class="o">=</span><span class="m">3753</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In this example, the packets intended for port 22 are now forwarded to port 3753.
+<em>&ndash;add-forward-port=port=22</em> 这部分貌似有问题，应该删掉一个&quot;port=&quot;，待求证！
+To forward packets to another IPv4 address, usually an internal address, without changing the destination port.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external --add-forward-port<span class="o">=</span><span class="nv">port</span><span class="o">=</span>22:proto<span class="o">=</span>tcp:toaddr<span class="o">=</span>192.0.2.55
+</code></pre></td></tr></table>
+</div>
+</div><p>In this example, the packets intended for port 22 are now forwarded to the same port at the address given with the toaddr.
+To forward packets to another port at another IPv4 address, usually an internal address.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt; firewall-cmd --zone<span class="o">=</span>external /
+      --add-forward-port<span class="o">=</span><span class="nv">port</span><span class="o">=</span>22:proto<span class="o">=</span>tcp:toport<span class="o">=</span>2055:toaddr<span class="o">=</span>192.0.2.55
+</code></pre></td></tr></table>
+</div>
+</div><p>In this example, the packets intended for port 22 are now forwarded to port 2055 at the address given with the toaddr option.</p>
+<h2 id="resources">Resources</h2>
+<p><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html" target="_blank" rel="noopener noreffer">How to using firewalls</a>
+<a href="https://fedoraproject.org/wiki/FirewallD?rd=FirewallD/" target="_blank" rel="noopener noreffer">fedora firewalld wiki</a>
+<a href="http://linux.vbird.org/linux_server/0250simple_firewall.php#firewall_topo" target="_blank" rel="noopener noreffer">鸟哥的私房菜-防火墙的一般网络布线示意</a></p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/firewalld-usage/index.md" target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="#" onclick="return false;" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage" data-via="xxxx" data-hashtags="linux,firewall"><i class="fab fa-twitter fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/firewalld-usage/" data-hashtag="linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Line" data-sharer="line" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" onclick="return false;" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage"><i class="fab fa-weibo fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Myspace" data-sharer="myspace" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" onclick="return false;" title="分享到 Blogger" data-sharer="blogger" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" onclick="return false;" title="分享到 Evernote" data-sharer="evernote" data-url="http://example.org/firewalld-usage/" data-title="Firewalld Usage"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">linux</a>,&nbsp;<a href="/tags/firewall/">firewall</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/unix-io-models/" class="prev" rel="prev" title="Unix IO models"><i class="fas fa-angle-left fa-fw"></i>Unix IO models</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.90.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">KongLong</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/fuse/fuse.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></div>
+
+<div class="pjax-assets"><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"blog post comment","lightTheme":"github-light","repo":"ikonglong/ikonglong.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true};</script><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/katex.min.css">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+    <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript></div>
+</body>
+
+</html>

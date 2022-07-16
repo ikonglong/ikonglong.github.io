@@ -93,7 +93,7 @@ sync 和 async I/O 并不是具体的 I/O model，只是根据 **请求进程是
 
 - blocking/non-blocking I/O 与 sync/async I/O 之间有什么区别？
 
-  我们先看问题本身，blocking/non-blocking I/O 确实是具体的 I/O model。但如果 sync/async I/O 指的是 I/O model，问题描述本身就有错误，因为没有一个具体的 I/O model 叫 sync I/O；如果指的是上一节中讲述的对 I/O model 的分类，也需要对问题描述做些调整，以便说清楚要对比的两个对象是什么。
+  我们先看问题本身，blocking/non-blocking I/O 是具体的 I/O model。但如果 sync/async I/O 指的是 I/O model，那么问题描述本身就有错误，因为没有一个具体的 I/O model 叫 sync I/O；如果指的是上一节中讲述的对 I/O model 的分类，也需要对问题描述做些调整，以便说清楚要对比的两个具体对象。
 
 - 有人认为，I/O 有阻塞/非阻塞、同步/异步这分，这两个维度是正交的，两两组合就得到四种 I/O model。
   

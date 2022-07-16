@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>linux - 标签 - 恐龙的烂笔头</title>
+        <link>http://example.org/tags/linux/</link>
+        <description>linux - 标签 - 恐龙的烂笔头</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Jul 2022 16:48:01 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Firewalld Usage</title>
+    <link>http://example.org/firewalld-usage/</link>
+    <pubDate>Sat, 16 Jul 2022 16:48:01 &#43;0800</pubDate><author>
+        <name>KongLong</name>
+    </author><guid>http://example.org/firewalld-usage/</guid>
+    <description><![CDATA[Introduction to firewalld The dynamic firewall daemon firewalld provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or]]></description>
+</item></channel>
+</rss>

@@ -3,7 +3,14 @@
         <title>所有文章 - 恐龙的烂笔头</title>
         <link>http://example.org/posts/</link>
         <description>所有文章 | 恐龙的烂笔头</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 16 Jul 2022 16:48:01 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Firewalld Usage</title>
+    <link>http://example.org/firewalld-usage/</link>
+    <pubDate>Sat, 16 Jul 2022 16:48:01 &#43;0800</pubDate><author>
+        <name>KongLong</name>
+    </author><guid>http://example.org/firewalld-usage/</guid>
+    <description><![CDATA[Introduction to firewalld The dynamic firewall daemon firewalld provides a dynamically managed firewall with support for network “zones” to assign a level of trust to a network and its associated connections and interfaces. It has support for IPv4 and IPv6 firewall settings. It supports Ethernet bridges and has a separation of runtime and permanent configuration options. It also has an interface for services or]]></description>
+</item><item>
     <title>Unix IO models</title>
     <link>http://example.org/unix-io-models/</link>
     <pubDate>Sat, 11 Dec 2021 15:40:33 &#43;0800</pubDate><author>
