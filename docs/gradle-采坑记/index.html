@@ -34,7 +34,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/gradle-%E9%87%87%E5%9D%91%E8%AE%B0\/"
-        },"genre": "posts","keywords": "java","wordcount":  499 ,
+        },"genre": "posts","keywords": "java","wordcount":  501 ,
         "url": "http:\/\/example.org\/gradle-%E9%87%87%E5%9D%91%E8%AE%B0\/","datePublished": "2020-12-16T00:30:25+08:00","dateModified": "2020-12-16T00:30:25+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -132,7 +132,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">KongLong</a>
                 </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>编程笔记</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/gradle%E4%BD%BF%E7%94%A8/"><i class="far fa-list-alt fa-fw"></i>Gradle使用</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-16">2020-12-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2020-12-16">2020-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 499 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-12-16">2020-12-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2020-12-16">2020-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 501 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div>
                     <div class="details toc" id="toc-static"  kept="">
@@ -152,7 +152,7 @@
             </div><p>最近开始尝试使用 Gradle 构建项目，踩了一些坑，简略记录以备忘。</p>
 <p>Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用。Wrapper 的主要目的是将项目构建依赖的 Gradle 版本配置化，作为构建脚本的一部分。Wrapper 只是一个脚本，它调用指定版本的 Gradle；如果指定版本的 Gradle 不存在，就下载并自动安装，避免开发者手动安装。官方推荐使用 Wrapper 执行任何 Gradle build。可是墙内下载 Gradle 非常慢，一开始还不知道为啥必须下载，如何加速，这让人很懊恼。如何使用 Wrapper，请看 <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html" target="_blank" rel="noopener noreffer">The Gradle Wrapper</a>。</p>
 <p>解决办法有两个，但都需要先手工把对应版本下载到本地。</p>
-<p><strong>办法一</strong></p>
+<p><strong>办法一：</strong></p>
 <ol>
 <li>
 <p>部署 HTTP Server (如 Nginx)，把下载的文件放入站点目录。</p>
@@ -180,7 +180,7 @@ zipStorePath=wrapper/dists
 </div><p>注意，对于 properties 文件，name/value 的分隔符是 &lsquo;=&rsquo; 或 &lsquo;:'，所以如果 value 中包含这两个字符，记得用 \ 进行转义。</p>
 </li>
 </ol>
-<p><strong>办法二</strong></p>
+<p><strong>办法二：</strong></p>
 <ol>
 <li>
 <p>把下载文件放到本地某个目录，例如：/Users/{user}/Cellar/gradle-6.6.1-bin.zip</p>

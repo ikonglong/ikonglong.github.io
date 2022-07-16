@@ -103,27 +103,3 @@ sync 和 async I/O 并不是具体的 I/O model，只是根据 **请求进程是
 
 - UNP-Vol1, I/O Models: *UNIX Network Programming Volume 1, Third Edition* "6.2 I/O Models"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

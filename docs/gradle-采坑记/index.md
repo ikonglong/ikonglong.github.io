@@ -7,10 +7,9 @@ Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用�
 
 解决办法有两个，但都需要先手工把对应版本下载到本地。
 
-**办法一**
+**办法一：**
 
 1. 部署 HTTP Server (如 Nginx)，把下载的文件放入站点目录。
-
 2. 修改 {Gradle Project}/gradle/wrapper/gradle-wrapper.properties 文件，将 distributionUrl 设置为本地或内网的可用下载地址。
 
    ```properties
@@ -24,7 +23,7 @@ Gradle 项目可以使用 Gradle Wrapper (简称 Wrapper)，也可以不使用�
 
    注意，对于 properties 文件，name/value 的分隔符是 '=' 或 ':'，所以如果 value 中包含这两个字符，记得用 \ 进行转义。
 
-**办法二**
+**办法二：**
 
 1. 把下载文件放到本地某个目录，例如：/Users/{user}/Cellar/gradle-6.6.1-bin.zip
 
