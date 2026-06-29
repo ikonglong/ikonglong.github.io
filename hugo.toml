@@ -1,7 +1,7 @@
 # ===== Basic =====
 baseURL = "https://ikonglong.github.io/"
 theme = "LoveIt"
-title = "Konglong's Blog"
+title = "Foolish, curious, fearless as a two-year-old."
 
 # default content language ["en", "zh-cn", ...]
 defaultContentLanguage = "en"
@@ -58,7 +58,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
   defaultTheme = "auto"
   gitRepo = "https://github.com/ikonglong/ikonglong.github.io"
   dateFormat = "2006-01-02"
-  title = "Konglong's Blog"
+  title = "Foolish, curious, fearless as a two-year-old."
   description = "Konglong's personal blog"
   images = ["/logo.png"]
 
@@ -72,7 +72,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     mobileMode = "auto"
     [params.header.title]
       logo = ""
-      name = "Konglong's Blog"
+      name = "Foolish, curious, fearless as a two-year-old."
       pre = "<i class='far fa-kiss-wink-heart' aria-hidden='true'></i>"
       typeit = false
 
